@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import TodoDataService from '../../api1/todoService/TodoDataService.js'
+import TodoDataService from '../../api/todoService/TodoDataService.js'
 import AuthenticationService from './AuthenticationService'
+import moment from 'moment'
 
 class ListTodosComponent extends Component {
 
@@ -16,6 +17,8 @@ class ListTodosComponent extends Component {
             message: null
         }
         this.deleteTodoClicked = this.deleteTodoClicked.bind(this)
+        this.updateTodoClicked = this.updateTodoClicked.bind(this)
+        this.addTodoClicked = this.addTodoClicked.bind(this)
         this.refreshTodos = this.refreshTodos.bind(this)
     }
 
@@ -62,6 +65,11 @@ class ListTodosComponent extends Component {
         this.props.history.push(`/todos/${id}`)
     }
 
+    addTodoClicked() {
+        console.log("'create")
+        this.props.history.push(`/todos/-1`)
+    }
+
     render() {
         //console.log('render')
         return (
@@ -88,7 +96,7 @@ class ListTodosComponent extends Component {
                                             {/* <td>{todo.id}</td> */}
                                             <td>{todo.description}</td>
                                             <td>{todo.done.toString()}</td>
-                                            <td>{todo.targetDate.toString()}</td>
+                                            <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
                                             <td><button className="btn btn-warning" onClick={() => this.updateTodoClicked(todo.id)}>Update</button></td>
                                             <td><button className="btn btn-danger" onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                         </tr>
@@ -96,6 +104,9 @@ class ListTodosComponent extends Component {
                             }
                         </tbody>
                     </table>
+                    <div className="row">
+                        <button className="btn btn-success" onClick={this.addTodoClicked}>Add</button>
+                    </div>
                 </div>
             </div>
         )

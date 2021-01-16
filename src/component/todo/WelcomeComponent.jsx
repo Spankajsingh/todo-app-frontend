@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-import HelloWorldService from '../../api1/todoService/HelloWorldService.js' ;
+import HelloWorldService from '../../api/todoService/HelloWorldService.js' ;
 
 class WelcomeComponent extends Component {
 
